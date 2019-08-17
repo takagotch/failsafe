@@ -89,6 +89,12 @@ if (breaker.allowsExecution()) {
     breaker.recordFailure(e);
   }
 }
+
+CircuitBreaker<Object> breaker = new CircuitBreaker<>()
+  .handle(ConnectException.class)
+  .withFailureThreshold(3, 10)
+  .withSuccessThreshold(5)
+  .withDelay(Duration.ofMinutes(1));
 ```
 
 ```
